@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Relationship Reading · Born March 20, 2016</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:       #1a1508;
+  --parchment: #f5f0e8;
+  --cream:     #faf7f0;
+  --gold:      #b8892a;
+  --gold-lt:   #d4aa55;
+  --gold-pale: #f0e4c0;
+  --purple:    #3d2d6e;
+  --purple-lt: #6b52b0;
+  --purple-pale: #ede9f8;
+  --teal:      #1a5c50;
+  --teal-lt:   #2d9b84;
+  --teal-pale: #e0f2ed;
+  --rose:      #7a2d3e;
+  --rose-pale: #f8eaed;
+  --text:      #2a2015;
+  --text-md:   #5a4e38;
+  --text-lt:   #9a8e78;
+  --border:    rgba(184,137,42,0.25);
+  --border-md: rgba(184,137,42,0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.6;
+}
+
+/* ── STAR FIELD ── */
+#stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--dur, 4s) var(--delay, 0s) infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: var(--op, 0.4); transform: scale(1); }
+}
+
+/* ── COVER SECTION ── */
+#cover {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: radial-gradient(ellipse at 50% 40%, #2a1f5e 0%, #150d30 50%, #0a0620 100%);
+  overflow: hidden;
+}
+
+#cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  z-index: 2;
+}
+
+.cover-ornament {
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: var(--gold-lt);
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
+  animation: fadeUp 1.2s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.4em;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1.2s 0.15s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 300;
+  color: #f0e8d0;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  animation: fadeUp 1.2s 0.3s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--gold-lt);
+  margin-bottom: 3rem;
+  animation: fadeUp 1.2s 0.45s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-poem {
+  max-width: 520px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-style: italic;
+  color: rgba(240,232,208,0.75);
+  line-height: 2;
+  animation: fadeUp 1.2s 0.6s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 1.2s 1.2s ease both;
+}
+.scroll-cue span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: var(--gold-lt);
+  opacity: 0.7;
+}
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold-lt), transparent);
+  animation: scrollPulse 2s infinite ease-in-out;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 0.9; transform: scaleY(1); }
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,247,240,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 1.5rem;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-md);
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ── MAIN LAYOUT ── */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+/* ── SECTION HEADERS ── */
+.part-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  color: var(--purple);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.section-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 2.5rem;
+}
+
+/* ── PROSE ── */
+p {
+  margin-bottom: 1.4em;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--purple);
+}
+
+em {
+  color: var(--text-md);
+}
+
+/* ── INFO BOX ── */
+.info-box {
+  background: var(--purple-pale);
+  border: 1px solid rgba(61,45,110,0.2);
+  border-left: 3px solid var(--purple-lt);
+  border-radius: 2px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--purple);
+}
+
+.info-box.gold {
+  background: #fdf8ee;
+  border-color: rgba(184,137,42,0.3);
+  border-left-color: var(--gold);
+  color: var(--text);
+}
+
+.info-box.teal {
+  background: var(--teal-pale);
+  border-color: rgba(26,92,80,0.2);
+  border-left-color: var(--teal-lt);
+  color: var(--teal);
+}
+
+.info-box.rose {
+  background: var(--rose-pale);
+  border-color: rgba(122,45,62,0.2);
+  border-left-color: var(--rose);
+  color: var(--rose);
+}
+
+.info-box-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.75;
+}
+
+/* ── NATAL GRID ── */
+.natal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.natal-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 1.25rem 1.5rem;
+  border-radius: 2px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.natal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.natal-card-symbol {
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.natal-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 0.25rem;
+}
+
+.natal-card-body {
+  font-size: 0.88rem;
+  color: var(--text-md);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── BLOCKQUOTE / ORACLE ── */
+.oracle {
+  position: relative;
+  margin: 3rem 0;
+  padding: 2.5rem 2.5rem 2.5rem 3rem;
+  border-left: 1px solid var(--gold);
+  background: linear-gradient(135deg, #fdf9f0 0%, #f9f4e8 100%);
+}
+
+.oracle::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: var(--gold-lt);
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.oracle p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--purple);
+  line-height: 2;
+  margin-bottom: 0.5rem;
+}
+.oracle p:last-child { margin-bottom: 0; }
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), rgba(184,137,42,0.1));
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.tl-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tl-dot {
+  position: absolute;
+  left: -2rem;
+  top: 0.35rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: var(--cream);
+  transform: translateX(-4px);
+}
+
+.tl-item.highlight .tl-dot {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(184,137,42,0.15);
+}
+
+.tl-date {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.tl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 0.4rem;
+}
+
+.tl-body {
+  font-size: 0.95rem;
+  color: var(--text-md);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── DATA TABLE ── */
+.astro-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+}
+
+.astro-table th {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--purple);
+  color: white;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-weight: 400;
+}
+
+.astro-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.astro-table tr:last-child td { border-bottom: none; }
+.astro-table tr:nth-child(even) td { background: rgba(245,240,232,0.5); }
+.astro-table tr.highlight-row td { background: rgba(240,228,192,0.4); }
+
+.astro-table td:first-child {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  white-space: nowrap;
+  padding-right: 1.5rem;
+}
+
+
+/* ── SECTION DIVIDER ── */
+.sect-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 1rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.sect-divider::before, .sect-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-md), transparent);
+}
+.sect-divider-symbol {
+  font-size: 1.2rem;
+  color: var(--gold-lt);
+  letter-spacing: 0.5em;
+}
+
+/* ── WORLD POINT CALLOUT ── */
+.world-point {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: radial-gradient(ellipse at center, rgba(61,45,110,0.06) 0%, transparent 70%);
+  border: 1px solid var(--border);
+  margin: 3rem 0;
+  position: relative;
+}
+
+.world-point-symbol {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  animation: slowSpin 30s linear infinite;
+}
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.world-point-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--purple);
+  margin-bottom: 0.5rem;
+}
+
+.world-point-body {
+  font-size: 0.95rem;
+  color: var(--text-md);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── CONVERGENCE BOX ── */
+.convergence {
+  background: var(--purple);
+  color: white;
+  padding: 2.5rem 2.5rem;
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.convergence::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(184,137,42,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.convergence-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 1.25rem;
+}
+
+.convergence-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  align-items: flex-start;
+}
+.convergence-item:last-child { margin-bottom: 0; }
+
+.conv-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.conv-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.88);
+  margin: 0;
+}
+
+.conv-text strong {
+  color: var(--gold-lt);
+  font-weight: 500;
+}
+
+/* ── FINAL CLOSE ── */
+#close {
+  background: radial-gradient(ellipse at 50% 60%, #2a1f5e 0%, #150d30 50%, #0a0620 100%);
+  text-align: center;
+  padding: 7rem 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#close .cover-ornament { margin-bottom: 1.5rem; }
+#close .cover-poem { margin: 0 auto 3rem; color: rgba(240,232,208,0.8); }
+
+.close-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-style: italic;
+  color: var(--gold-lt);
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION BG ACCENTS ── */
+#natal     { background: linear-gradient(180deg, var(--cream) 0%, #f8f4ec 100%); }
+#western   { background: var(--cream); }
+#chinese   { background: linear-gradient(180deg, #fdf8ee 0%, var(--cream) 100%); }
+#numerology{ background: var(--cream); }
+#timeline  { background: linear-gradient(180deg, var(--cream) 0%, #f2ede4 100%); }
+#oracle    { background: var(--cream); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .natal-grid { grid-template-columns: 1fr; }
+  .oracle { padding: 2rem 1.5rem 2rem 2rem; }
+  .astro-table { font-size: 0.82rem; }
+  .astro-table th, .astro-table td { padding: 0.65rem 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- STARS -->
+<div id="stars"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     COVER
+══════════════════════════════════════════════════════════════════════ -->
+<section id="cover">
+  <div class="cover-ornament">♈ ♀ ♃</div>
+  <div class="cover-subtitle">A Relationship Reading</div>
+  <h1 class="cover-title">Born at the<br>Vernal Equinox</h1>
+  <div class="cover-date">March 20, 2016 · 5:15 PM CT · College Station, TX · The Tenth Year</div>
+  <div class="cover-poem">
+    You were born where winter meets the fire,<br>
+    at the turn of something old into new.<br>
+    I found you standing at the edge of everything<br>
+    and the whole sky cracked open with you.
+  </div>
+  <div class="scroll-cue">
+    <span>Begin</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-link" href="#natal">Natal Chart</a>
+    <a class="nav-link" href="#western">Western Astrology</a>
+    <a class="nav-link" href="#chinese">Chinese Astrology</a>
+    <a class="nav-link" href="#numerology">Numerology</a>
+    <a class="nav-link" href="#timeline">Key Dates</a>
+    <a class="nav-link" href="#oracle">The Oracle</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART ONE: NATAL SIGNATURE
+══════════════════════════════════════════════════════════════════════ -->
+<section id="natal" class="section">
+  <span class="part-label reveal">Part One</span>
+  <h2 class="section-title reveal">The Natal Signature</h2>
+  <div class="section-rule reveal"></div>
+
+  <p class="reveal">Every relationship, like every person, is born. It enters the world at a specific moment, under a specific sky, and that sky imprints itself upon the nature of what is born. This reading treats the relationship itself as the subject — its birth chart, its character, and its destiny.</p>
+
+  <div class="world-point reveal">
+    <span class="world-point-symbol">☉</span>
+    <div class="world-point-title">Sun at 0° Aries</div>
+    <p class="world-point-body">The World Point. The first degree of the entire zodiac. The moment of universal reset, where all endings become beginnings — the Vernal Equinox itself.</p>
+  </div>
+
+  <div class="natal-grid">
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">♈</span>
+      <div class="natal-card-title">Sun · 0° Aries</div>
+      <p class="natal-card-body">The World Point. Born at the very threshold of the zodiac — the Vernal Equinox, the moment of universal reset. A relationship of collective significance.</p>
+    </div>
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">♀</span>
+      <div class="natal-card-title">Venus conjunct Neptune</div>
+      <p class="natal-card-body">Mystical, idealized love. A love that feels like a dream you're almost afraid to name — shimmering, sacred, softly blurred at the edges.</p>
+    </div>
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">☽</span>
+      <div class="natal-card-title">Moon conjunct Jupiter</div>
+      <p class="natal-card-body">Expansive emotion and warmth. A large emotional life — generous, enthusiastic, naturally optimistic. Joy is not incidental here; it is structural.</p>
+    </div>
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">♂</span>
+      <div class="natal-card-title">Mars · Sagittarius</div>
+      <p class="natal-card-body">Adventurous, spirited, and always searching. The energy that moves this relationship forward is philosophical, expansive, and in love with the horizon.</p>
+    </div>
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">♃</span>
+      <div class="natal-card-title">Jupiter · Virgo</div>
+      <p class="natal-card-body">Devotion through refinement and careful tending. Growth through the small, daily, attentive acts of love — not grand gestures alone.</p>
+    </div>
+    <div class="natal-card reveal">
+      <span class="natal-card-symbol">♅</span>
+      <div class="natal-card-title">Uranus · Aries</div>
+      <p class="natal-card-body">A revolutionary spark at the core. This relationship has always carried the quality of sudden awakening — of seeing something no one else could quite see.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 1rem;" class="reveal">Venus Conjunct Neptune: The Dream of Love</h3>
+  <p class="reveal">The Venus-Neptune conjunction at birth is the emotional heart of this relationship. Venus rules love, beauty, and connection; Neptune rules dreams, spirituality, and the dissolution of boundaries. Together, they create a love that feels like a dream you are almost afraid to name — shimmering, softly blurred at the edges, infused with a quality of the sacred.</p>
+  <p class="reveal">This conjunction carries both gift and challenge. The gift: extraordinary sensitivity, creativity, spiritual depth, and the capacity to see the beloved as something approaching the divine. The challenge: the tendency to idealize, to project, to love the image more than the reality. The journey of this relationship has been, in part, the gentle shift from Neptune's dream toward Saturn's truth — and this is precisely what the tenth year demands.</p>
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART TWO: WESTERN ASTROLOGY
+══════════════════════════════════════════════════════════════════════ -->
+<section id="western" class="section">
+  <span class="part-label reveal">Part Two</span>
+  <h2 class="section-title reveal">Western Astrology<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Year 2026</em></h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="convergence reveal">
+    <div class="convergence-title">Why 2026 is Extraordinary — Three Systems Converge</div>
+    <div class="convergence-item">
+      <span class="conv-icon">⭐</span>
+      <p class="conv-text"><strong>Western Astrology:</strong> Saturn and Neptune conjunct at 0° Aries — the exact natal Sun degree. A once-in-36-year event, landing precisely on the 10th birthday.</p>
+    </div>
+    <div class="convergence-item">
+      <span class="conv-icon">🐎</span>
+      <p class="conv-text"><strong>Chinese Astrology:</strong> Year of the Fire Horse — occurring only once every 60 years. The Fire Monkey enters its first major elemental transformation year.</p>
+    </div>
+    <div class="convergence-item">
+      <span class="conv-icon">☸</span>
+      <p class="conv-text"><strong>Numerology:</strong> Personal year 10/1 — the Wheel of Fortune. Completion and new beginning simultaneously. The most auspicious cycle-turning number possible.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 0.75rem;" class="reveal">Saturn Conjunct Neptune at 0° Aries</h3>
+  <p class="reveal" style="font-style:italic;color:var(--text-md);margin-bottom:1.25rem;">The Transit of the Decade · February 20, 2026</p>
+
+  <p class="reveal">This is the defining transit of 2026 for this relationship, and it cannot be overstated. Saturn and Neptune meet at 0° Aries — the exact birth degree — on February 20, 2026. This combination occurs only once every 36 years. For it to land precisely at the World Point, on the tenth birthday, is an event of rare cosmic precision.</p>
+
+  <div class="info-box reveal">
+    <div class="info-box-title">What this transit asks</div>
+    <strong>Saturn brings:</strong> Structure. Commitment. Crystallization. The demand for reality over fantasy. Saturn is the architect — it does not destroy dreams; it asks them to become buildings.<br><br>
+    <strong>Neptune brings:</strong> Vision. Spirituality. The dissolving of what is no longer true. Neptune is the ocean — it fills whatever form Saturn constructs with living water.<br><br>
+    <strong>Together at the natal Sun:</strong> <em>What do you want this to actually be? Not the dream of it — the architecture of it. This is the year to make something real.</em>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 0.75rem;" class="reveal">Jupiter's Two Phases</h3>
+
+  <div class="info-box teal reveal">
+    <div class="info-box-title">Jupiter in Cancer · January – June</div>
+    Deep emotional nourishment, home, roots, and belonging. The first half of 2026 wants this relationship to feel genuinely held and nourished. Questions of foundation and emotional security arise gently.
+  </div>
+
+  <div class="info-box teal reveal">
+    <div class="info-box-title">Jupiter enters Leo · June 30 onward</div>
+    Creativity, radiance, joy, and full expression arrive. The latter half of 2026 is where the relationship gets to shine. The <strong>Jupiter-Saturn trine on August 31</strong> is the year's most auspicious single window — structure and expansion align simultaneously.
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 0.75rem;" class="reveal">Venus Retrograde: The Shadow Passage</h3>
+
+  <div class="info-box rose reveal">
+    <div class="info-box-title">October 3 – November 14, 2026</div>
+    Venus retrograde in Scorpio, then Libra. For a relationship born under Venus-Neptune, this retrograde is deeply personal. Old patterns, unspoken truths, and the question of <em>what is this worth to me?</em> surface for examination. This is not a crisis — it is a reckoning that ultimately deepens intimacy. Face it with honesty rather than avoidance. What survives this passage is unshakeable.
+  </div>
+
+  <p class="reveal">The eclipse series shifts to the Leo-Aquarius axis from July 2026 onward — themes of creative identity and the balance between self and relationship come forward. The total solar eclipse in Leo on August 12 is a coronation: something fully comes into its own power.</p>
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART THREE: CHINESE ASTROLOGY
+══════════════════════════════════════════════════════════════════════ -->
+<section id="chinese" class="section">
+  <span class="part-label reveal">Part Three</span>
+  <h2 class="section-title reveal">Chinese Astrology<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Year of the Fire Horse</em></h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="info-box gold reveal">
+    <div class="info-box-title">The Birth Year</div>
+    <strong>Year of the Fire Monkey · 2016</strong><br>
+    The Fire Monkey is the most dynamic of all Monkey years — brilliant ideas combined with the willpower to bring them into being. Clever, passionate, adaptive, and intensely alive. This relationship has always moved between the playful and the profound simultaneously.
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 0.75rem;" class="reveal">2026: The Fire Horse Arrives</h3>
+
+  <p class="reveal">The Fire Horse comes only once every 60 years. It last occurred in 1966; it will not return until 2086. For a Fire Monkey, the Fire Horse year is a natural elemental ally — both signs share Fire, creating resonance and amplification rather than friction.</p>
+
+  <p class="reveal">The Horse energy is fundamentally about motion, courage, and forward movement. It rewards decisiveness and authenticity. It does not slow down to accommodate ambivalence — it asks, simply and directly: <em>Are you coming or not?</em></p>
+
+  <table class="astro-table reveal">
+    <thead>
+      <tr>
+        <th>The Fire Horse Rewards</th>
+        <th>The Fire Horse Cautions Against</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bold, consistent action</td>
+        <td>Impulsive decisions made in the speed of the year</td>
+      </tr>
+      <tr>
+        <td>Showing up steadily — practicing love, not performing it</td>
+        <td>People-pleasing and accommodating what no longer fits</td>
+      </tr>
+      <tr>
+        <td>Quick thinking and creative problem-solving</td>
+        <td>Skipping foundations in the excitement of momentum</td>
+      </tr>
+      <tr>
+        <td>Authentic expression, even when uncomfortable</td>
+        <td>Staying in situations that have already been outgrown</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">The counsel for the Fire Monkey in the Fire Horse year is precise: slow the decision down by one beat, ask one more question — and then move. Lucky elements: the colors <strong>red and gold</strong>, and the numbers <strong>3 and 7</strong>.</p>
+
+  <div class="info-box gold reveal">
+    <div class="info-box-title">The Completion of the First Chinese Cycle</div>
+    In Chinese cosmology, 10 years marks the completion of one full cycle of Heavenly Stems — the ten celestial pillars that govern time's inner dimension. This relationship has now turned the full inner wheel once. The tenth year is simultaneously the harvest and the planting.
+  </div>
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART FOUR: NUMEROLOGY
+══════════════════════════════════════════════════════════════════════ -->
+<section id="numerology" class="section">
+  <span class="part-label reveal">Part Four</span>
+  <h2 class="section-title reveal">Numerology<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Sacred Mathematics</em></h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="info-box reveal">
+    <div class="info-box-title">Life Path Calculation</div>
+    Month: 3 &nbsp;·&nbsp; Day: 2 + 0 = 2 &nbsp;·&nbsp; Year: 2 + 0 + 1 + 6 = 9<br>
+    Sum: 3 + 2 + 9 = 14 &nbsp;→&nbsp; 1 + 4 = <strong>5</strong><br><br>
+    <strong>Life Path 5: The Adventurer</strong>
+  </div>
+
+  <p class="reveal">The Life Path 5 is the most dynamic and transformative of all life paths — the number of freedom, change, adventure, and the full engagement of the senses. For a relationship with a Life Path of 5, growth and change are not threats — they are the medium. This is a love that has never been meant to stay the same. Each chapter of its story has looked different from the last, and this is the nature of the 5 expressing itself faithfully.</p>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin:2.5rem 0 0.75rem;" class="reveal">The Tenth Anniversary: The Wheel of Fortune</h3>
+
+  <p class="reveal">In the Tarot, the number 10 corresponds to the Wheel of Fortune — one of the most powerful cards in the Major Arcana. It represents the completion of a full cycle, the turning of fate in one's favor, and the conscious step into the next revolution of time.</p>
+
+  <p class="reveal">The number 10 contains within it both <strong>1</strong> (new beginning, initiation, the self standing ready) and <strong>0</strong> (infinite potential, divine wholeness, the void before creation). It is simultaneously an ending and a beginning, a completion and a launching point.</p>
+
+  <div class="info-box reveal">
+    <div class="info-box-title">The Triple Convergence</div>
+    For this relationship to reach its tenth year under the convergence of Saturn-Neptune at its natal World Point, in the Year of the Fire Horse, with the Wheel of Fortune numerologically governing the anniversary — this is a moment of extraordinary alignment across every system of meaning ever devised to map the movement of time.
+  </div>
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART FIVE: KEY DATES
+══════════════════════════════════════════════════════════════════════ -->
+<section id="timeline" class="section">
+  <span class="part-label reveal">Part Five</span>
+  <h2 class="section-title reveal">Key Dates<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Tenth Year, 2026</em></h2>
+  <div class="section-rule reveal"></div>
+
+  <p class="reveal">The following dates are not prescriptions — they are invitations. Each marks a moment where the cosmic weather is particularly attuned to the themes of this relationship's natal chart.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">February 20, 2026</div>
+      <div class="tl-title">Saturn Conjunct Neptune · 0° Aries</div>
+      <p class="tl-body">A direct hit on the natal Sun. The most powerful single moment of the year for this relationship. A clarity or commitment that has been building for years may crystallize. Do not avoid what arises.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">March 11, 2026</div>
+      <div class="tl-title">Jupiter Turns Direct in Cancer</div>
+      <p class="tl-body">Emotional expansion that has felt frozen or blocked begins to flow again. Warmth returns after a period of quiet.</p>
+    </div>
+    <div class="tl-item highlight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">March 20, 2026</div>
+      <div class="tl-title">The 10th Birthday · The Vernal Equinox</div>
+      <p class="tl-body">The Sun returns to 0° Aries. The wheel completes its first revolution. The day to mark, to celebrate, and to set conscious intention for the next decade.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">June 30, 2026</div>
+      <div class="tl-title">Jupiter Enters Leo</div>
+      <p class="tl-body">A wave of creative joy and celebratory energy arrives. The relationship gets to shine, to feel proud of what it has become.</p>
+    </div>
+    <div class="tl-item highlight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">August 12, 2026</div>
+      <div class="tl-title">Total Solar Eclipse in Leo</div>
+      <p class="tl-body">A coronation — something fully comes into its own power. Creative expression and identity reach a new peak.</p>
+    </div>
+    <div class="tl-item highlight">
+      <div class="tl-dot"></div>
+      <div class="tl-date">August 31, 2026</div>
+      <div class="tl-title">Jupiter Trine Saturn · The Most Auspicious Window</div>
+      <p class="tl-body">The year's single most auspicious alignment. Structure and expansion align simultaneously. Commitments made here are blessed. Visions become practical.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">October 3 – November 14, 2026</div>
+      <div class="tl-title">Venus Retrograde in Scorpio</div>
+      <p class="tl-body">The shadow passage. Turn toward depth, honesty, and the questions that have waited to be asked. What survives this passage is unshakeable ground.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PART SIX: THE ORACLE
+══════════════════════════════════════════════════════════════════════ -->
+<section id="oracle" class="section">
+  <span class="part-label reveal">Part Six</span>
+  <h2 class="section-title reveal">The Oracle</h2>
+  <div class="section-rule reveal"></div>
+
+  <p class="reveal">When three independent traditions of meaning-making — Western astrology, Chinese astrology, and numerology — converge on the same moment with the same message, that convergence carries its own authority.</p>
+
+  <div class="oracle reveal">
+    <p>You were born at the very first breath of the zodiac — at the point where all endings become beginnings, where winter surrenders to spring. <strong>You have always been a beginning.</strong></p>
+    <p>Now you are ten. In the Tarot, the Wheel turns. In the stars, Saturn and Neptune stand at your exact birth point, asking you to make the dream a structure. In the Year of the Fire Horse, the cosmos says: <strong>gallop.</strong></p>
+    <p>You have survived every season now — the early sweetness, the confusing middle, the years of testing. What remains is what is real. <strong>What is real in you is extraordinary.</strong></p>
+    <p>This year, the question is not whether you are loved. The question is whether you are willing to be known — fully, without the soft blur of Neptune's dream-veil — and to love what you find there. Saturn says yes. The Horse says yes. The Wheel says yes.</p>
+    <p><strong>Vow what you mean. Mean what you vow. The next ten years are already waiting.</strong></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CLOSE
+══════════════════════════════════════════════════════════════════════ -->
+<section id="close">
+  <div class="cover-ornament" style="animation:none;">♈ ♀ ♃</div>
+  <div class="cover-poem">
+    Breathe — the equinox holds us even now.<br>
+    Earth below, and stars above.<br>
+    We are the dream that dared to wake,<br>
+    born of wonder, held in love.
+  </div>
+  <div class="close-tagline">March 20, 2016 — March 20, 2026 · Ten years. One wheel. The next revolution begins.</div>
+</section>
+
+</main>
+
+<script>
+// ── STARS ──────────────────────────────────────────────────────────────────
+(function() {
+  const container = document.getElementById('stars');
+  const cover = document.getElementById('cover');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --dur:${3+Math.random()*5}s;
+      --delay:${Math.random()*6}s;
+      --op:${0.2+Math.random()*0.6};
+    `;
+    cover.appendChild(s);
+  }
+
+  // Stars in close section too
+  const closeEl = document.getElementById('close');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --dur:${3+Math.random()*5}s;
+      --delay:${Math.random()*6}s;
+      --op:${0.2+Math.random()*0.5};
+    `;
+    closeEl.appendChild(s);
+  }
+})();
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal, .tl-item');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => {
+        e.target.classList.add('visible');
+      }, e.target.classList.contains('natal-card') ? i * 60 : 0);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => io.observe(el));
+
+// ── NAV ACTIVE STATE ───────────────────────────────────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const navIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => navIO.observe(s));
+
+
+// ── STAGGER NATAL CARDS ───────────────────────────────────────────────────
+const cards = document.querySelectorAll('.natal-card');
+cards.forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.08}s`;
+});
+</script>
+</body>
+</html>

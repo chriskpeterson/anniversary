@@ -1,6 +1,6 @@
 const CACHE = 'relationship-reading-v1';
 const ASSETS = [
-  './relationship_reading.html',
+  './index.html',
   './manifest.json',
   'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap'
 ];

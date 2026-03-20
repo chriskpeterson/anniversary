@@ -654,35 +654,7 @@ h3.sub {
 #ai-send:active { transform: scale(0.93); }
 #ai-send:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* ─── INSTALL BANNER ─────────────────────────────────────── */
-#install-banner {
-  position: fixed; top: calc(var(--nav-h) + 8px); left: 50%;
-  transform: translateX(-50%) translateY(-120%);
-  z-index: 400;
-  background: var(--purple);
-  color: white; border: 1px solid var(--gold);
-  border-radius: 10px;
-  padding: 0.65rem 1rem 0.65rem 1.25rem;
-  display: flex; align-items: center; gap: 0.75rem;
-  font-size: 0.88rem; font-family: 'EB Garamond', serif;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  white-space: nowrap;
-  max-width: calc(100vw - 2rem);
-}
-#install-banner.show { transform: translateX(-50%) translateY(0); }
-#install-btn {
-  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em;
-  padding: 0.4rem 0.85rem; border-radius: 6px;
-  background: var(--gold); border: none; color: var(--text);
-  cursor: pointer; flex-shrink: 0;
-}
-#install-dismiss {
-  background: none; border: none; color: rgba(255,255,255,0.5);
-  cursor: pointer; font-size: 1.2rem; padding: 0; flex-shrink: 0;
-  line-height: 1;
-}
-.install-text { color: rgba(255,255,255,0.88); overflow: hidden; text-overflow: ellipsis; }
+
 </style>
 </head>
 <body>
@@ -1052,11 +1024,7 @@ h3.sub {
 </div>
 
 <!-- INSTALL BANNER -->
-<div id="install-banner" aria-live="polite">
-  <span class="install-text">Add to your home screen</span>
-  <button id="install-btn">Install</button>
-  <button id="install-dismiss" aria-label="Dismiss">&#xD7;</button>
-</div>
+
 
 <script>
 /* ── ORRERY ──────────────────────────────────────────────────────────── */
@@ -1468,33 +1436,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-let deferredPrompt = null;
-const banner    = document.getElementById('install-banner');
-const installBtn= document.getElementById('install-btn');
-const dismissBtn= document.getElementById('install-dismiss');
 
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (!localStorage.getItem('pwa_dismissed')) {
-    setTimeout(() => banner.classList.add('show'), 3000);
-  }
-});
-
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === 'accepted') banner.classList.remove('show');
-  deferredPrompt = null;
-});
-
-dismissBtn.addEventListener('click', () => {
-  banner.classList.remove('show');
-  localStorage.setItem('pwa_dismissed', '1');
-});
-
-window.addEventListener('appinstalled', () => banner.classList.remove('show'));
 
 </script>
 </body>

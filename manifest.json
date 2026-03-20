@@ -2,7 +2,7 @@
   "name": "A Relationship Reading · Vernal Equinox 2016",
   "short_name": "The Reading",
   "description": "An astrological reading for a relationship born at the Vernal Equinox, March 20 2016",
-  "start_url": "./relationship_reading.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#080414",
   "theme_color": "#080414",

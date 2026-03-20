@@ -1,0 +1,26 @@
+{
+  "name": "A Relationship Reading · Vernal Equinox 2016",
+  "short_name": "The Reading",
+  "description": "An astrological reading for a relationship born at the Vernal Equinox, March 20 2016",
+  "start_url": "./relationship_reading.html",
+  "display": "standalone",
+  "background_color": "#080414",
+  "theme_color": "#080414",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23150d30'/><text x='96' y='130' font-size='110' text-anchor='middle' fill='%23d4aa55'>♈</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23150d30'/><text x='256' y='360' font-size='300' text-anchor='middle' fill='%23d4aa55'>♈</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "personalization"],
+  "lang": "en-US"
+}

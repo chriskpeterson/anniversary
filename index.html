@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Relationship Reading · Born March 20, 2016</title>
-<meta name="description" content="An astrological reading for a relationship born at the Vernal Equinox, March 20, 2016 · College Station, TX">
+<title>Chris &amp; Andrea · Ten Years · March 20, 2026</title>
+<meta name="description" content="A tenth anniversary reading for Chris &amp; Andrea, married at the Vernal Equinox, March 20, 2016 · College Station, TX">
 <meta name="theme-color" content="#080414">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="https://w.soundcloud.com/player/api.js"></script>
 <style>
 :root {
   --cream:       #faf7f0;
@@ -350,6 +351,85 @@ h3.sub {
 #timeline   { background: linear-gradient(180deg, var(--cream) 0%, #f2ede4 100%); }
 #oracle     { background: var(--cream); }
 
+/* ─── MONTHLY CHECK-IN CARDS ─────────────────────────────── */
+.checkin-card {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  background: white;
+  margin: 1.75rem 0;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  transition: box-shadow 0.25s;
+}
+@media (hover:hover) {
+  .checkin-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+}
+.checkin-header {
+  background: linear-gradient(135deg, var(--purple) 0%, #2a1f5e 100%);
+  padding: clamp(1rem,3vw,1.25rem) clamp(1rem,3vw,1.5rem);
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+.checkin-month {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.6rem,1.5vw,0.72rem);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold-lt);
+}
+.checkin-energy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem,2.8vw,1.4rem);
+  font-weight: 400; color: white; line-height: 1.3;
+}
+.checkin-body {
+  padding: clamp(1rem,3vw,1.5rem) clamp(1rem,3vw,1.5rem);
+}
+.checkin-body p {
+  font-size: clamp(0.9rem,1.9vw,1rem);
+  color: var(--text-md); margin-bottom: 1rem; line-height: 1.75;
+}
+.checkin-prompt {
+  background: var(--purple-pale);
+  border-left: 3px solid var(--purple-lt);
+  padding: 0.85rem 1.1rem;
+  font-size: clamp(0.85rem,1.8vw,0.95rem);
+  color: var(--purple); line-height: 1.7;
+  font-style: italic;
+  border-radius: 0 2px 2px 0;
+}
+.checkin-prompt-label {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.52rem,1.2vw,0.6rem);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--purple-lt); margin-bottom: 0.4rem;
+  font-style: normal;
+}
+
+/* ─── MUSIC PLAYER ───────────────────────────────────────── */
+#music-player { position: fixed; bottom: 90px; right: 20px; z-index: 500; }
+#music-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(21,13,48,0.88);
+  border: 1.5px solid var(--gold);
+  color: var(--gold-lt); font-size: 1.25rem;
+  cursor: pointer; backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  transition: transform 0.2s, background 0.2s, opacity 0.2s;
+}
+#music-btn:hover { transform: scale(1.1); background: var(--purple); }
+#music-btn.paused { opacity: 0.55; }
+#music-tooltip {
+  position: absolute; right: 54px; top: 50%; transform: translateY(-50%);
+  background: rgba(21,13,48,0.88); color: var(--gold-lt);
+  font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em;
+  text-transform: uppercase; white-space: nowrap;
+  padding: 0.35rem 0.75rem; border-radius: 4px;
+  border: 1px solid var(--border);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+#music-player:hover #music-tooltip { opacity: 1; }
+
 /* ─── CLOSE ──────────────────────────────────────────── */
 #close {
   background: radial-gradient(ellipse at 50% 55%, #2a1f5e 0%, #150d30 50%, #080414 100%);
@@ -659,6 +739,19 @@ h3.sub {
 </head>
 <body>
 
+<!-- ── MUSIC PLAYER ──────────────────────────────────────────────────────── -->
+<div id="music-player">
+  <iframe id="sc-iframe"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/chris-peterson-63/us&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&buying=false&sharing=false&download=false&show_artwork=false&callback=true"
+    allow="autoplay"
+    style="display:none; width:1px; height:1px; border:none;">
+  </iframe>
+  <div id="music-tooltip">Music</div>
+  <button id="music-btn" aria-label="Pause music" title="Pause music">
+    <span id="music-icon">♫</span>
+  </button>
+</div>
+
 <!-- ══ COVER ══════════════════════════════════════════════════════════════ -->
 <section id="cover">
   <canvas id="orrery-canvas" aria-hidden="true"></canvas>
@@ -670,13 +763,13 @@ h3.sub {
       <span class="glyph-float" style="animation-delay:0.7s">♀</span>&thinsp;
       <span class="glyph-float" style="animation-delay:1.4s">♃</span>
     </div>
-    <div class="cover-subtitle">A Relationship Reading</div>
-    <h1 class="cover-title">Born at the<br>Vernal Equinox</h1>
-    <div class="cover-date">March 20, 2016 · 5:15 PM CT · College Station, TX · The Tenth Year</div>
+    <div class="cover-subtitle">A Tenth Anniversary Reading</div>
+    <h1 class="cover-title">Chris &amp; Andrea</h1>
+    <div class="cover-date">Married March 20, 2016 · 5:15 PM CT · College Station, TX · Ten Years</div>
     <div class="cover-poem">
-      You were born where winter meets the fire,<br>
+      A marriage born where winter meets the fire,<br>
       at the turn of something old into new.<br>
-      I found you standing at the edge of everything<br>
+      Chris found Andrea standing at the edge of everything<br>
       and the whole sky cracked open with you.
     </div>
   </div>
@@ -695,6 +788,7 @@ h3.sub {
     <a class="nav-link" href="#chinese">Chinese</a>
     <a class="nav-link" href="#numerology">Numerology</a>
     <a class="nav-link" href="#timeline">Key Dates</a>
+    <a class="nav-link" href="#checkins">Monthly</a>
     <a class="nav-link" href="#oracle">Oracle</a>
   </div>
 </nav>
@@ -707,7 +801,7 @@ h3.sub {
   <h2 class="section-title reveal">The Natal Signature</h2>
   <div class="section-rule reveal"></div>
 
-  <p class="reveal">Every relationship, like every person, is born. It enters the world at a specific moment, under a specific sky, and that sky imprints itself upon the nature of what is born. This reading treats the relationship itself as the subject — its birth chart, its character, and its destiny.</p>
+  <p class="reveal">Every marriage, like every person, is born. It enters the world at a specific moment, under a specific sky, and that sky imprints itself upon the nature of what is born. This reading treats Chris and Andrea's marriage itself as the subject — its birth chart, its character, and its destiny.</p>
 
   <div class="world-point reveal">
     <span class="world-point-symbol">☉</span>
@@ -749,11 +843,11 @@ h3.sub {
   </div>
 
   <h3 class="sub reveal">Venus Conjunct Neptune: The Dream of Love</h3>
-  <p class="reveal">The Venus-Neptune conjunction at birth is the emotional heart of this relationship. Venus rules love, beauty, and connection; Neptune rules dreams, spirituality, and the dissolution of boundaries. Together, they create a love that feels like a dream you are almost afraid to name — shimmering, softly blurred at the edges, infused with a quality of the sacred.</p>
-  <p class="reveal">This conjunction carries both gift and challenge. The gift: extraordinary sensitivity, creativity, spiritual depth, and the capacity to see the beloved as something approaching the divine. The challenge: the tendency to idealize, to project, to love the image more than the reality. The journey of this relationship has been, in part, the gentle shift from Neptune's dream toward Saturn's truth — and this is precisely what the tenth year demands.</p>
+  <p class="reveal">The Venus-Neptune conjunction at the birth of Chris and Andrea's marriage is its emotional heart. Venus rules love, beauty, and connection; Neptune rules dreams, spirituality, and the dissolution of boundaries. Together, they create a love that feels like a dream you are almost afraid to name — shimmering, softly blurred at the edges, infused with a quality of the sacred.</p>
+  <p class="reveal">This conjunction carries both gift and challenge. The gift: extraordinary sensitivity, creativity, spiritual depth, and the capacity to see each other as something approaching the divine. The challenge: the tendency to idealize, to project, to love the image more than the reality. The journey of this marriage has been, in part, the gentle shift from Neptune's dream toward Saturn's truth — and this is precisely what the tenth year demands of Chris and Andrea.</p>
 
   <h3 class="sub reveal">Moon Conjunct Jupiter: The Generous Heart</h3>
-  <p class="reveal">The Moon-Jupiter conjunction at birth gives this relationship a large emotional life. It is not a quiet, contained love — it is expansive, generous, enthusiastic, and warm. This pairing wants to grow, to include, to celebrate. There is a natural optimism here, a trust in abundance. Joy is not incidental to this relationship; it is structural.</p>
+  <p class="reveal">The Moon-Jupiter conjunction at the birth of this marriage gives Chris and Andrea a large emotional life together. It is not a quiet, contained love — it is expansive, generous, enthusiastic, and warm. This pairing wants to grow, to include, to celebrate. There is a natural optimism here, a trust in abundance. Joy is not incidental to this marriage; it is structural.</p>
 </section>
 
 <div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
@@ -785,29 +879,29 @@ h3.sub {
   <p class="reveal">This is the defining transit of 2026 for this relationship. Saturn and Neptune meet at 0° Aries — the exact birth degree — on February 20, 2026. This combination occurs only once every 36 years. For it to land precisely at the World Point, on the tenth birthday, is an event of rare cosmic precision.</p>
 
   <div class="info-box reveal">
-    <div class="info-box-title">What this transit asks</div>
+    <div class="info-box-title">What this transit asks of Chris &amp; Andrea</div>
     <strong>Saturn brings:</strong> Structure. Commitment. Crystallization. The demand for reality over fantasy. Saturn is the architect — it does not destroy dreams; it asks them to become buildings.<br><br>
     <strong>Neptune brings:</strong> Vision. Spirituality. The dissolving of what is no longer true. Neptune fills whatever form Saturn constructs with living water.<br><br>
-    <strong>Together at the natal Sun:</strong> <em>What do you want this to actually be? Not the dream of it — the architecture of it. This is the year to make something real.</em>
+    <strong>Together at the natal Sun:</strong> <em>What do you want this marriage to actually be? Not the dream of it — the architecture of it. This is the year for Chris and Andrea to make something real.</em>
   </div>
 
   <h3 class="sub reveal">Jupiter's Two Phases</h3>
   <div class="info-box teal reveal">
     <div class="info-box-title">Jupiter in Cancer · January – June</div>
-    Deep emotional nourishment, home, roots, and belonging. The first half of 2026 wants this relationship to feel genuinely held and nourished. Questions of foundation and emotional security arise gently.
+    Deep emotional nourishment, home, roots, and belonging. The first half of 2026 wants Chris and Andrea to feel genuinely held and nourished by each other. Questions of foundation, home, and emotional security arise gently — and tenderly.
   </div>
   <div class="info-box teal reveal">
     <div class="info-box-title">Jupiter enters Leo · June 30 onward</div>
-    Creativity, radiance, joy, and full expression arrive. The latter half of 2026 is where the relationship gets to shine. The <strong>Jupiter-Saturn trine on August 31</strong> is the year's most auspicious single window — structure and expansion align simultaneously.
+    Creativity, radiance, joy, and full expression arrive. The latter half of 2026 is where Chris and Andrea's marriage gets to shine — to feel proud of what it has become. The <strong>Jupiter-Saturn trine on August 31</strong> is the year's most auspicious single window — structure and expansion align simultaneously.
   </div>
 
   <h3 class="sub reveal">Venus Retrograde: The Shadow Passage</h3>
   <div class="info-box rose retrograde-box reveal">
     <div class="info-box-title">October 3 – November 14, 2026</div>
-    Venus retrograde in Scorpio, then Libra. For a relationship born under Venus-Neptune, this retrograde is deeply personal. Old patterns, unspoken truths, and the question of <em>what is this worth to me?</em> surface for examination. This is not a crisis — it is a reckoning that ultimately deepens intimacy. What survives this passage is unshakeable.
+    Venus retrograde in Scorpio, then Libra. For a marriage born under Venus-Neptune, this retrograde is deeply personal. Old patterns, unspoken truths, and the question of <em>what is this worth to us?</em> surface for examination. This is not a crisis for Chris and Andrea — it is a reckoning that ultimately deepens intimacy. What survives this passage is unshakeable.
   </div>
 
-  <p class="reveal">The eclipse series shifts to the Leo-Aquarius axis from July 2026 onward. The total solar eclipse in Leo on August 12 is a coronation: something fully comes into its own power.</p>
+  <p class="reveal">The eclipse series shifts to the Leo-Aquarius axis from July 2026 onward. The total solar eclipse in Leo on August 12 is a coronation: something in this marriage fully comes into its own power.</p>
 </section>
 
 <div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
@@ -825,7 +919,7 @@ h3.sub {
   </div>
 
   <h3 class="sub reveal">2026: The Fire Horse Arrives</h3>
-  <p class="reveal">The Fire Horse comes only once every 60 years. It last occurred in 1966; it will not return until 2086. For a Fire Monkey, the Fire Horse year is a natural elemental ally — both signs share Fire, creating resonance and amplification rather than friction.</p>
+  <p class="reveal">The Fire Horse comes only once every 60 years. It last occurred in 1966; it will not return until 2086. For a Fire Monkey marriage like Chris and Andrea's, the Fire Horse year is a natural elemental ally — both signs share Fire, creating resonance and amplification rather than friction.</p>
   <p class="reveal">The Horse energy is fundamentally about motion, courage, and forward movement. It rewards decisiveness and authenticity. It does not slow down to accommodate ambivalence — it asks, simply and directly: <em>Are you coming or not?</em></p>
 
   <table class="astro-table reveal">
@@ -863,15 +957,15 @@ h3.sub {
     <strong>Life Path 5: The Adventurer</strong>
   </div>
 
-  <p class="reveal">The Life Path 5 is the most dynamic and transformative of all life paths — the number of freedom, change, adventure, and the full engagement of the senses. For a relationship with a Life Path of 5, growth and change are not threats — they are the medium.</p>
+  <p class="reveal">The Life Path 5 is the most dynamic and transformative of all life paths — the number of freedom, change, adventure, and the full engagement of the senses. For a marriage with a Life Path of 5, growth and change are not threats to Chris and Andrea — they are the medium through which love deepens.</p>
 
   <h3 class="sub reveal">The Tenth Anniversary: <span class="wheel-icon" style="font-size:0.85em;">☸</span> The Wheel of Fortune</h3>
   <p class="reveal">In the Tarot, the number 10 corresponds to the Wheel of Fortune — one of the most powerful cards in the Major Arcana. It represents the completion of a full cycle, the turning of fate in one's favor, and the conscious step into the next revolution of time.</p>
-  <p class="reveal">The number 10 contains within it both <strong>1</strong> (new beginning, initiation, the self standing ready) and <strong>0</strong> (infinite potential, divine wholeness, the void before creation). It is simultaneously an ending and a beginning.</p>
+  <p class="reveal">The number 10 contains within it both <strong>1</strong> (new beginning, initiation, the self standing ready) and <strong>0</strong> (infinite potential, divine wholeness, the void before creation). For Chris and Andrea, it is simultaneously an ending and a beginning.</p>
 
   <div class="info-box reveal">
     <div class="info-box-title">The Triple Convergence</div>
-    For this relationship to reach its tenth year under the convergence of Saturn-Neptune at its natal World Point, in the Year of the Fire Horse, with the Wheel of Fortune numerologically governing the anniversary — this is a moment of extraordinary alignment across every system of meaning ever devised to map the movement of time.
+    For Chris and Andrea's marriage to reach its tenth year under the convergence of Saturn-Neptune at its natal World Point, in the Year of the Fire Horse, with the Wheel of Fortune numerologically governing the anniversary — this is a moment of extraordinary alignment across every system of meaning ever devised to map the movement of time.
   </div>
 </section>
 
@@ -882,70 +976,247 @@ h3.sub {
   <span class="part-label reveal">Part Five</span>
   <h2 class="section-title reveal">Key Dates<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Tenth Year, 2026</em></h2>
   <div class="section-rule reveal"></div>
-  <p class="reveal">The following dates are not prescriptions — they are invitations. Each marks a moment where the cosmic weather is particularly attuned to the themes of this relationship's natal chart.</p>
+  <p class="reveal">The following dates are not prescriptions — they are invitations for Chris and Andrea. Each marks a moment where the cosmic weather is particularly attuned to the themes of this marriage's natal chart.</p>
 
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-date">February 20, 2026</div>
       <div class="tl-title">Saturn Conjunct Neptune · 0° Aries</div>
-      <p class="tl-body">A direct hit on the natal Sun. The most powerful single moment of the year for this relationship. A clarity or commitment building for years may crystallize. Do not avoid what arises.</p>
+      <p class="tl-body">A direct hit on Chris and Andrea's natal Sun. The most powerful single moment of the year. A clarity or commitment building for years may crystallize between them. Do not avoid what arises.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-date">March 11, 2026</div>
       <div class="tl-title">Jupiter Turns Direct in Cancer</div>
-      <p class="tl-body">Emotional expansion that has felt frozen or blocked begins to flow again. Warmth returns after a period of quiet.</p>
+      <p class="tl-body">Emotional expansion that has felt frozen or blocked begins to flow again. Warmth returns after a period of quiet — just in time for the anniversary.</p>
     </div>
     <div class="tl-item highlight">
       <div class="tl-dot"></div>
       <div class="tl-date">March 20, 2026</div>
-      <div class="tl-title">The 10th Birthday · The Vernal Equinox</div>
-      <p class="tl-body">The Sun returns to 0° Aries. The wheel completes its first revolution. The day to mark, to celebrate, and to set conscious intention for the next decade.</p>
+      <div class="tl-title">Ten Years · The Vernal Equinox · Happy Anniversary</div>
+      <p class="tl-body">The Sun returns to 0° Aries. The wheel completes its first full revolution. The day to mark, to celebrate Chris and Andrea, and to set conscious intention for the next decade together.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-date">June 30, 2026</div>
       <div class="tl-title">Jupiter Enters Leo</div>
-      <p class="tl-body">A wave of creative joy and celebratory energy arrives. The relationship gets to shine, to feel proud of what it has become.</p>
+      <p class="tl-body">A wave of creative joy and celebratory energy arrives. Chris and Andrea's marriage gets to shine, to feel proud of what it has become and who they are together.</p>
     </div>
     <div class="tl-item highlight">
       <div class="tl-dot"></div>
       <div class="tl-date">August 12, 2026</div>
       <div class="tl-title">Total Solar Eclipse in Leo</div>
-      <p class="tl-body">A coronation — something fully comes into its own power. Creative expression and identity reach a new peak.</p>
+      <p class="tl-body">A coronation — something in Chris and Andrea's life together fully comes into its own power. Creative expression and shared identity reach a new peak.</p>
     </div>
     <div class="tl-item highlight">
       <div class="tl-dot"></div>
       <div class="tl-date">August 31, 2026</div>
       <div class="tl-title">Jupiter Trine Saturn · The Most Auspicious Window</div>
-      <p class="tl-body">The year's single most auspicious alignment. Structure and expansion align simultaneously. Commitments made here are blessed. Visions become practical.</p>
+      <p class="tl-body">The year's single most auspicious alignment for this marriage. Structure and expansion align simultaneously. Commitments made here are blessed. Visions become practical.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-date">October 3 – November 14, 2026</div>
       <div class="tl-title">Venus Retrograde in Scorpio</div>
-      <p class="tl-body">The shadow passage. Turn toward depth, honesty, and the questions that have waited to be asked. What survives this passage is unshakeable ground.</p>
+      <p class="tl-body">The shadow passage. Chris and Andrea are invited to turn toward depth, honesty, and the questions that have waited to be asked. What survives this passage is unshakeable ground.</p>
     </div>
   </div>
 </section>
 
 <div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
 
-<!-- ══ PART SIX: ORACLE ═══════════════════════════════════════════════════ -->
-<section id="oracle" class="section">
+<!-- ══ PART SIX: MONTHLY CHECK-INS ══════════════════════════════════════ -->
+<section id="checkins" class="section">
   <span class="part-label reveal">Part Six</span>
+  <h2 class="section-title reveal">Monthly Check-Ins<br><em style="font-weight:300;font-size:0.75em;color:var(--text-md);">The Marriage Year, Month by Month</em></h2>
+  <div class="section-rule reveal"></div>
+
+  <p class="reveal">Beginning on your anniversary — March 20, 2026 — here is a reading for each month of your tenth year. Return to this page on the first of each month and sit with what it says together. These are not predictions. They are invitations to notice.</p>
+
+  <!-- MARCH 20 – APRIL 19 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">March 20 – April 19</div>
+      <div class="checkin-energy">☉ Aries · The Ignition</div>
+    </div>
+    <div class="checkin-body">
+      <p>The marriage year opens at the most powerful threshold in the zodiac — 0° Aries, your natal Sun. This is not a gentle beginning. This is a spark. The energy of Aries is cardinal fire: initiating, brave, and absolutely alive in the present moment. Everything that has been waiting inside your marriage for the right moment — this is that moment.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What is one thing I have wanted to say to you that I haven't said yet? What do we want to begin?
+      </div>
+    </div>
+  </div>
+
+  <!-- APRIL 20 – MAY 20 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">April 20 – May 20</div>
+      <div class="checkin-energy">☉ Taurus · The Settling</div>
+    </div>
+    <div class="checkin-body">
+      <p>After the ignition of Aries, Taurus asks you to land. To slow down. To enjoy what you have built rather than immediately building something new. This is the month for sensory pleasure — good food, unhurried time, physical presence with each other. Jupiter in Cancer deepens your sense of home and belonging. Let the marriage be nourishing this month, not ambitious.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What does comfort feel like to you right now? What would make our home feel more like a sanctuary?
+      </div>
+    </div>
+  </div>
+
+  <!-- MAY 21 – JUNE 20 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">May 21 – June 20</div>
+      <div class="checkin-energy">☉ Gemini · The Conversation</div>
+    </div>
+    <div class="checkin-body">
+      <p>Gemini season brings curiosity, wit, and the joy of mental connection. This is a month to talk — really talk — about things you find fascinating, not just things you need to manage. Mars moving through mid-sky encourages you to be direct and playful at once. Plan something that surprises each other. Read something together. Let the marriage be intellectually alive this month.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What are you curious about right now? What would you want to learn or explore together?
+      </div>
+    </div>
+  </div>
+
+  <!-- JUNE 21 – JULY 22 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">June 21 – July 22</div>
+      <div class="checkin-energy">☉ Cancer · The Heart of Home</div>
+    </div>
+    <div class="checkin-body">
+      <p>Cancer season and Jupiter's final weeks in Cancer amplify the themes of roots, family, memory, and emotional belonging. This is a deeply tender month. The solstice opens a portal of feeling. Something in your shared history may surface to be honored — an old wound finally ready to heal, a memory worth celebrating. Let yourselves be soft with each other. At month's end, Jupiter crosses into Leo, shifting the energy dramatically toward radiance.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What is one memory from our ten years together that you want to hold onto forever? What does "home" mean to you now?
+      </div>
+    </div>
+  </div>
+
+  <!-- JULY 23 – AUGUST 22 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">July 23 – August 22</div>
+      <div class="checkin-energy">☉ Leo · The Radiance</div>
+    </div>
+    <div class="checkin-body">
+      <p>Jupiter is now fully in Leo, and Leo season arrives with it. This is the most outwardly joyful month of your year. A total solar eclipse in Leo on August 12 crowns this season — something in your marriage reaches a new level of visibility and pride. Let yourselves be seen. Celebrate publicly. Do something beautiful and slightly extravagant. This is the month the marriage gets to shine, and Chris and Andrea get to shine with it.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What are you most proud of about us? How do you want to celebrate what we've become?
+      </div>
+    </div>
+  </div>
+
+  <!-- AUGUST 23 – SEPTEMBER 22 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">August 23 – September 22</div>
+      <div class="checkin-energy">☉ Virgo · The Tending</div>
+    </div>
+    <div class="checkin-body">
+      <p>After Leo's radiance, Virgo asks you to tend. Jupiter in Leo trine Saturn on August 31 is the year's single most auspicious alignment — structure and expansion align. This is the window for any practical commitment or life decision you've been circling. Virgo season is about devotion through the small, daily acts: the cup of coffee brought without asking, the errand run quietly, the attention to what the other actually needs. Jupiter in Leo reminds you that even the small acts can be performed with joy and pride.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What is one small thing I could do more consistently that would make you feel loved? Is there something we've been meaning to decide or commit to?
+      </div>
+    </div>
+  </div>
+
+  <!-- SEPTEMBER 23 – OCTOBER 22 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">September 23 – October 22</div>
+      <div class="checkin-energy">☉ Libra · The Balance</div>
+    </div>
+    <div class="checkin-body">
+      <p>Libra is the sign of partnership itself — and here you are in its season, a marriage of ten years, being asked directly: how is the balance? Not just fairly, but beautifully. Libra wants harmony that is genuinely felt, not performed. As Venus approaches her retrograde at the end of this season, a kind of honest accounting begins naturally. This is a good month for a real conversation about how each of you is feeling — not just managing.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        Do you feel like the partnership is balanced right now? What would more ease look like for each of us?
+      </div>
+    </div>
+  </div>
+
+  <!-- OCTOBER 23 – NOVEMBER 21 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">October 23 – November 21</div>
+      <div class="checkin-energy">☉ Scorpio · Venus Retrograde · The Depth</div>
+    </div>
+    <div class="checkin-body">
+      <p>Venus turns retrograde in Scorpio on October 3 and this month carries the full weight of that passage. For a marriage born under Venus-Neptune, this is the most personally significant transit of the year. Scorpio goes to the root. Unspoken things surface. Old patterns become visible. This is not a time to avoid — it is a time to go toward the difficult thing with courage and care. What survives this month between Chris and Andrea will be some of the strongest ground in your marriage.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        Is there anything between us I've been afraid to bring up? What do I need you to truly understand about me right now?
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVEMBER 22 – DECEMBER 21 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">November 22 – December 21</div>
+      <div class="checkin-energy">☉ Sagittarius · The Opening</div>
+    </div>
+    <div class="checkin-body">
+      <p>Venus turns direct on November 14, and then Sagittarius season arrives like a window thrown open. After October's depth, the marriage takes a breath. Mars in your natal chart lives in Sagittarius — this is the sign of your marriage's forward motion, its adventurous spirit, its philosophical restlessness. This month wants you to look toward the horizon together. What is the next adventure? What do you believe in? Plan something that excites both of you.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What are we looking forward to? What's something we've always talked about doing that we should actually do?
+      </div>
+    </div>
+  </div>
+
+  <!-- DECEMBER 22 – JANUARY 19 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">December 22 – January 19, 2027</div>
+      <div class="checkin-energy">☉ Capricorn · The Foundation</div>
+    </div>
+    <div class="checkin-body">
+      <p>Capricorn season bridges the year into the next. It is the sign of legacy, of long investment, of building something that lasts. As the year turns and the new year arrives, you cross into your eleventh year together. Capricorn asks: what are we building? Not just this year — over the next decade. The tenth year was the wheel turning. The eleventh is the first revolution of what comes next. Spend time honoring what you've accomplished before naming what you intend.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What do we want to build together in the next ten years? What does the best version of our life look like?
+      </div>
+    </div>
+  </div>
+
+  <!-- JANUARY 20 – MARCH 19 -->
+  <div class="checkin-card reveal">
+    <div class="checkin-header">
+      <div class="checkin-month">January 20 – March 19, 2027</div>
+      <div class="checkin-energy">☉ Aquarius &amp; Pisces · The Return</div>
+    </div>
+    <div class="checkin-body">
+      <p>The final arc of the year moves through Aquarius — the sign of community, vision, and collective belonging — and into Pisces, Neptune's own sign, where the veil between the dream and the real grows thin. This is the closing passage before the next anniversary. Aquarius asks how your marriage participates in something larger than itself. Pisces invites you back toward the mystical thread that has always run through Chris and Andrea's love. Rest together in the wonder of what you are.</p>
+      <div class="checkin-prompt">
+        <div class="checkin-prompt-label">This month, ask each other:</div>
+        What has surprised us most about this year? What feels different now than it did on our anniversary?
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="sect-divider"><span class="sect-divider-symbol">✦ ✦ ✦</span></div>
+
+<!-- ══ PART SEVEN: ORACLE ══════════════════════════════════════════════════ -->
+<section id="oracle" class="section">
+  <span class="part-label reveal">Part Seven</span>
   <h2 class="section-title reveal">The Oracle</h2>
   <div class="section-rule reveal"></div>
 
-  <p class="reveal">When three independent traditions of meaning-making — Western astrology, Chinese astrology, and numerology — converge on the same moment with the same message, that convergence carries its own authority.</p>
+  <p class="reveal">When three independent traditions of meaning-making — Western astrology, Chinese astrology, and numerology — converge on the same moment with the same message, that convergence carries its own authority. This is what the stars say to Chris and Andrea on their tenth anniversary.</p>
 
   <div class="oracle reveal">
-    <p>You were born at the very first breath of the zodiac — at the point where all endings become beginnings, where winter surrenders to spring. <strong>You have always been a beginning.</strong></p>
-    <p>Now you are ten. In the Tarot, the Wheel turns. In the stars, Saturn and Neptune stand at your exact birth point, asking you to make the dream a structure. In the Year of the Fire Horse, the cosmos says: <strong>gallop.</strong></p>
-    <p>You have survived every season now — the early sweetness, the confusing middle, the years of testing. What remains is what is real. <strong>What is real in you is extraordinary.</strong></p>
-    <p>This year, the question is not whether you are loved. The question is whether you are willing to be known — fully, without the soft blur of Neptune's dream-veil — and to love what you find there. Saturn says yes. The Horse says yes. The Wheel says yes.</p>
-    <p><strong>Vow what you mean. Mean what you vow. The next ten years are already waiting.</strong></p>
+    <p>Chris and Andrea were married at the very first breath of the zodiac, at the point where all endings become beginnings, where winter surrenders to spring. <strong>You have always been a beginning.</strong></p>
+    <p>Now begins your tenth year together. In the Tarot, the Wheel turns. In the stars, Saturn and Neptune stand at your exact birth point, asking you to make the dream a structure. In the Year of the Fire Horse, the cosmos says: <strong>gallop.</strong></p>
+    <p>You have survived every season now, the early sweetness, the confusing middle, the years of testing. What remains between you is what is real. <strong>What is real in you is extraordinary.</strong></p>
+    <p>This year, the question is not whether you are loved. The question is whether you are willing to be fully known — without the soft blur of Neptune's dream-veil — and to love what you find there in each other. Saturn says yes. The Horse says yes. The Wheel says yes.</p>
+    <p><strong>Vow what you mean. Mean what you vow. The next ten years are already waiting for you.</strong></p>
   </div>
 </section>
 
@@ -964,7 +1235,7 @@ h3.sub {
       We are the dream that dared to wake,<br>
       born of wonder, held in love.
     </div>
-    <div class="close-tagline">March 20, 2016 — March 20, 2026 · Ten years. One wheel. The next revolution begins.</div>
+    <div class="close-tagline">Chris &amp; Andrea · March 20, 2016 — March 20, 2026 · Ten years. One wheel. The next revolution begins.</div>
   </div>
 </section>
 
@@ -1437,6 +1708,65 @@ if ('serviceWorker' in navigator) {
 }
 
 
+/* ── MUSIC PLAYER ────────────────────────────────────────────────────── */
+(function() {
+  const btn    = document.getElementById('music-btn');
+  const icon   = document.getElementById('music-icon');
+  const iframe = document.getElementById('sc-iframe');
+  let playing  = false;
+  let ready    = false;
+
+  function scPost(method) {
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ method: method }),
+      'https://w.soundcloud.com'
+    );
+  }
+
+  window.addEventListener('message', function(e) {
+    if (e.origin !== 'https://w.soundcloud.com') return;
+    try {
+      const data = JSON.parse(e.data);
+      if (data.method === 'ready' && !ready) {
+        ready = true;
+        scPost('play');
+        playing = true;
+        icon.textContent = '♫';
+        btn.classList.remove('paused');
+      }
+      if (data.method === 'finish') {
+        playing = false;
+        icon.textContent = '♪';
+        btn.classList.add('paused');
+      }
+    } catch(err) {}
+  });
+
+  btn.addEventListener('click', () => {
+    if (!ready) return;
+    if (playing) {
+      scPost('pause');
+      playing = false;
+      icon.textContent = '♪';
+      btn.classList.add('paused');
+      btn.setAttribute('aria-label', 'Play music');
+    } else {
+      scPost('play');
+      playing = true;
+      icon.textContent = '♫';
+      btn.classList.remove('paused');
+      btn.setAttribute('aria-label', 'Pause music');
+    }
+  });
+
+  /* Kick off after first interaction to satisfy browser autoplay policy */
+  function tryAutoplay() {
+    scPost('play');
+  }
+  document.addEventListener('click',   tryAutoplay, { once: true });
+  document.addEventListener('scroll',  tryAutoplay, { once: true });
+  document.addEventListener('keydown', tryAutoplay, { once: true });
+})();
 
 </script>
 </body>
